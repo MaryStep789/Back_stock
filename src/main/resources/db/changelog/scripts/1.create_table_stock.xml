@@ -1,0 +1,22 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet  id="1.create_table_stock"  author="ms-generalova">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="stock"/>
+            </not>
+        </preConditions>
+        <createSequence sequenceName="stock_sequence" incrementBy="1" startValue="1"/>
+        <createTable tableName="stock">
+            <column name="id" type="bigint" defaultValueComputed="nextval('stock_sequence')">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="data" type="date"/>
+            <column name="name" type="varchar"/>
+            <column name="cost" type="bigint"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
